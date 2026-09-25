@@ -1,0 +1,29 @@
+21. Find all customers whose CNUM is 1000 above the SNUM of Serres.
+SELECT c.cname FROM customers c WHERE c.cnum = 1000 + (SELECT s.snum FROM salespeople s WHERE s.sname = 'Serres');
+
+22. Give the salespeople’s commissions as percentages instead of decimal numbers. 
+SELECT s.sname, CONCAT(s.comm * 100, '%') AS commission FROM salespeople s;
+
+23.Find the largest order taken by each salesperson on each date, eliminating those MAX orders which are less than $3000.00 in value.
+SELECT s.sname, o.snum, o.odate, MAX(o.amt) AS largest_order FROM orders o JOIN salespeople s ON s.snum = o.snum GROUP BY s.sname, o.snum, o.odate HAVING MAX(o.amt) >= 3000;
+
+24.List the largest orders for October 3, for each salesperson. 
+SELECT s.sname, s.snum, MAX(o.amt) AS largest_order FROM salespeople s JOIN orders o ON s.snum = o.snum WHERE o.odate = '1996-10-03' GROUP BY s.sname, s.snum;
+
+25.Find all customers located in cities where Serres (SNUM 1002) has customers.
+select *  from customers where city in(select city from customers snum =1002);
+
+26.Select all customers with a rating above 200.
+Select * from customers where rating > 200;
+
+27. Count the number of salespeople currently listing orders in the Orders table. 
+SELECT COUNT(DISTINCT snum) FROM orders;
+
+28. Produce all customers serviced by salespeople with a commission above 12%. Output the customer’s name and the salesperson’s rate of commission. 
+SELECT c.cname, s.comm FROM customers c JOIN salespeople s ON c.snum = s.snum WHERE s.comm > 0.12;
+
+29. Find salespeople who have multiple customers. 
+SELECT s.sname, s.snum FROM salespeople s JOIN customers c ON s.snum = c.snum GROUP BY s.sname, s.snum HAVING COUNT(c.cnum) > 1;
+
+30. Find salespeople with customers located in their city. 
+SELECT s.sname, c.cname, s.city FROM salespeople s JOIN customers c ON s.city = c.city;
