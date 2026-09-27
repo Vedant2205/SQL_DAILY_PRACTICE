@@ -1,0 +1,12 @@
+1. select * from orders o where o.cnum = (select c.cnum from customers c where c.cname = 'cisneros');
+
+2.select s.sname,Max(o.amt) as largest_order from salespeople s join orders o on s.snum = o.snum where s.sname = 'Serres' or s.sname = 'Rifkin' group by s.sname;
+
+3.select s.snum ,s.sname,s.comm,s.city from salespeople s ;
+
+4.SELECT c1.cname AS customer1,       c2.cname AS customer2 FROM customers c1 JOIN customers c2 ON c1.cnum < c2.cnum;
+
+5.select * from orders o where o.amt >(select avg(o2.amt) from orders o2 where o2.odate ='1996-10-04');
+
+6.select c.cname,c.cnum from customers c where c.rating = (select max(c2.rating) from customers c2 where c2.city = c.city);
+
