@@ -1,0 +1,9 @@
+ 1.select * from orders o  where o.amt > (select avg(o.amt) from orders o where o.odate ='1996-10-04');
+
+2.select c.cname,c.cnum from customers c where c.rating = (select max(c2.rating) from customers c2 where c2.city = c.city);
+
+3.select o.odate,sum(o.amt) from orders o group by o.odate order by sum(o.amt) desc;
+
+4.SELECT * FROM orders o WHERE o.amt < ANY (SELECT o2.amt FROM orders o2 JOIN customers c ON o2.cnum = c.cnum WHERE c.city = 'San Jose');
+
+5.
