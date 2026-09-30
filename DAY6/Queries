@@ -1,0 +1,19 @@
+1.select c.city ,max(c.rating) from customers c group by c.city;
+
+
+2.SELECT o.onum, c.cname, s.sname, o.amt * s.comm AS commission_amount
+FROM orders o
+JOIN customers c ON o.cnum = c.cnum
+JOIN salespeople s ON o.snum = s.snum
+WHERE c.rating > 100;
+
+3.SELECT COUNT(c.cnum) FROM customers c WHERE c.rating > (SELECT AVG(c2.rating) FROM customers c2 WHERE c2.city = 'San Jose');
+
+4.SELECT s1.sname AS salesperson1, s2.sname AS salesperson2 FROM salespeople s1 CROSS JOIN salespeople s2;
+
+5.select s.sname,s.snum from salespeople s where s.city ='Barcelona' or s.city = 'london';
+
+6.select s.sname,s.snum from salespeople s join customers c on c.snum = s.snum group by s.sname,s.snum having count(c.cnum)=1;
+
+7.SELECT c1.cname AS customer1, c2.cname AS customer2 FROM customers c1 JOIN customers c2 ON c1.snum = c2.snum WHERE c1.cnum < c2.cnum;
+
