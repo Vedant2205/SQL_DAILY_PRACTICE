@@ -1,0 +1,14 @@
+1.select * from orders where amt>1000;
+
+2.
+
+3.1.select distinct s.sname,s.snum from salespeople s join customers c on s.city = c.city where c.snum <> s.snum;
+3.2.select s.sname,s.snum from salespeople s where exists(select 1 from customers c where c.city = s.city and c.snum = s.snum);
+
+4.select c.cname,c.rating from customers c where c.rating>=ANY(Select c2.rating from customers c2 where c2.snum = (select s.snum from salespeople s where s.sname ="Serres"));
+
+5. select * from orders where odate='1996-10-03' or odate='1996-10-04';
+
+5.2. select * from orders where odate IN('1996-10-03','1996-10-04');
+
+6.SELECT c.cname, o1.onum AS order1, o2.onum AS order2 FROM orders o1 JOIN orders o2 ON o1.cnum = o2.cnum AND o1.onum < o2.onum JOIN customers c ON o1.cnum = c.cnum;
