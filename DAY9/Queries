@@ -1,0 +1,20 @@
+1.select s.sname,s.comm from salespeople s; 
+ 
+2.select c.cname,c.city from customers c where c.rating =(select c2.rating from customers c2 where c2.cnum=2001); 
+ 
+3.select distinct s.snum,s.sname from salespeople s join customers c on s.snum = c.snum where s.sname<c.cname; 
+ 
+4 select distinct c.cname,c.rating from customers c join orders o on c.cnum = o.cnum where o.amt >(select avg(o2.amt) from orders o2); 
+ 
+5.select o.onum,o.amt,o.odate from orders o; 
+ 
+6. select count(c.rating) from customers c where c.rating is not NULL; 
+ 
+7.select o.onum,s.sname,c.cname from orders o join salespeople s on o.snum = s.snum join customers c on o.cnum = c.cnum; 
+ 
+8.select s.comm from salespeople s join customers c on s.snum = c.snum where c.city = 'london'; 
+ 
+9.select * from customers c where c.snum in(1001,1004); 
+ 
+10. select o.odate,count(distinct o.snum) from orders o group by o.odate; 
+ 
