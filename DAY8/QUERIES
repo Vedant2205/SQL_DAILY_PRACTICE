@@ -1,0 +1,16 @@
+1.select c.cname from customers c where c.rating >ANY(select c1.rating from customers c1 where c1.city ='Rome'); 
+ 
+2.	select * from customers c where c.rating >= 100 or c.city = "Rome"; 
+ 
+3.	select * from customers c where c.snum =1001; 
+ 
+4.select snum,sum(amt) from orders group by snum having sum(amt) >(select max(amt) from orders); 
+ 
+5. select * from orders o where o.amt =0 and o.amt is not null; 
+ 
+6.SELECT s.sname, s.comm FROM salespeople s; 
+ 
+7.select s.sname,c.cname from salespeople s cross join customers c where s.sname<c.cname and c.rating<200; 
+ 
+7.1.SELECT s.sname, c.cname FROM salespeople s CROSS JOIN customers c WHERE s.sname < c.cname   AND c.rating < 200 ORDER BY s.sname, c.cname; 
+ 
