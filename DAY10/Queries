@@ -1,0 +1,5 @@
+1.select o.* from orders o join salespeople s on o.snum = s.snum where s.city ="london";
+
+2. select o.* from orders o join customers c on o.cnum = c.cnum join salespeople s on o.snum = s.snum where c.city<>s.city;
+
+3.
