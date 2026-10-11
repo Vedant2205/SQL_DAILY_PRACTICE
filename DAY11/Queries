@@ -1,0 +1,7 @@
+1. select Distinct s.snum from salespeople s join orders o on o.snum =s.snum;
+2. select c.rating,c.cname,c.cnum from customers c order by c.rating desc;
+3.select avg(s.comm) from salespeople s where s.city="London" group by s.city;
+4.select o.onum from orders o where o.snum =(select c.snum from customers c where c.cnum=2001);
+5.select s.sname,s.city from salespeople s where s.city ='London' and s.comm> 0.10;
+6.select * from orders where(amt<1000 or not (odate=10/03/1996 And cnum>2003));
+7. select cnum,min(amt) from orders group by cnum;
