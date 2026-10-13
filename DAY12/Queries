@@ -1,0 +1,9 @@
+1.SELECT DISTINCT s.sname, s.snum FROM salespeople s JOIN customers c ON s.snum = c.snum WHERE s.city <> c.city;
+
+2.select s.sname from salespeople s join customers c on c.snum = s.snum where s.comm >0.11 and c.rating<250;
+
+3.SELECT s1.sname, s2.sname FROM salespeople s1 JOIN salespeople s2 ON s1.city = s2.city WHERE s1.comm <> s2.comm AND s1.snum < s2.snum;
+
+4.SELECT s.sname, SUM(o.amt * s.comm) AS total_commission FROM salespeople s JOIN orders o ON s.snum = o.snum GROUP BY s.snum, s.sname ORDER BY total_commission DESC LIMIT 1;
+
+5.
