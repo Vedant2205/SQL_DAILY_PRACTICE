@@ -1,0 +1,80 @@
+100
+select if ( exists (select c.cnum from customers c join orders o on o.cnum=c.cnum group by c.cnum,c.rating having count(o.onum)>= all(select count(*) from orders group by cnum)and c.rating = (select max(rating) from customers)),'yes','no')as answer;
+
+101
+SELECT IF(
+    EXISTS (
+        SELECT c.cnum
+        FROM customers c
+        JOIN orders o ON c.cnum = o.cnum
+        GROUP BY c.cnum, c.rating
+        HAVING SUM(o.amt) >= ALL (
+            SELECT SUM(amt)
+            FROM orders
+            GROUP BY cnum
+        )
+        AND c.rating = (
+            SELECT MAX(rating)
+            FROM customers
+        )
+    ),
+    'yes',
+    'no'
+) AS answer;
+
+102
+ select c.* from customers c order by rating desc;
+
+103
+select o.odate from orders o join customers c on o.cnum=c.cnum where c.cname= 'hoffman';
+
+104
+select if(count(*) = count(distinct comm) ,'yes','no')as answer from salespeople;
+
+105
+select s.sname from salespeople s where not exists (select 1 from orders o where o.snum=s.snum and o.odate between '1996-10-03' and '1996-10-05');
+
+106
+select count(*) from salespeople s where exists (select 1 from orders o where o.snum=s.snum);
+
+107
+ select count(*) from customers c where exists ( select 1 from orders o where o.cnum=c.cnum);
+
+108
+ select o1.odate , o1.snum, o1.amt from orders o1 where o1.amt=(select max(o2.amt) from orders o2 where o2.snum=o1.snum);
+
+109
+ select sum(o.amt*s.comm) successful , s.sname from orders o join salespeople s on o.snum=s.snum group by s.sname, s.snum order by successful desc limit 1;
+
+110
+ select c.cname, sum(o.amt) worst from customers c join orders o on o.cnum=c.cnum group by c.cname,c.cnum order by worst limit 1 ;
+
+111
+select if(not exists (select c.cnum from customers c join orders o on c.cnum=o.cnum group by c.cnum, c.snum having sum(o.amt)<=200 and c.snum not in(select s.snum from salespeople s  where s.sname in ("peel" , "serres"))), 'yes','no')as answer;
+
+112
+select c1.cname, c2.cname, c1.rating from customers c1 join customers c2 on c1.rating=c2.rating and c1.cnum<c2.cnum;
+
+113
+ select  o1.* from orders o1 where o1.odate='1996-10-04' and o1.amt>(select avg(o2.amt) from orders o2 where o2.odate='1996-10-04');
+
+114
+select distinct c.cname from customers c join orders o1 on o1.cnum=c.cnum where o1.amt > (select avg(o2.amt) from orders o2);
+
+115
+select c1.cname , c1.rating from customers c1 where c1.rating > (select avg(c2.rating) from customers c2 where c2.city='san jose');
+
+116
+select sum(o1.amt) total , o1.snum, s.sname from orders o1 join salespeople s on o1.snum=s.snum group by s.snum, s.sname having total > all(select max(o2.amt) from orders o2);
+
+117
+select s.sname, s.snum from salespeople s join customers c on s.snum=c.snum group by s.snum, s.sname having count(c.snum)>1;
+
+118
+ select distinct s.snum, s.sname from salespeople s join customers c on c.city=s.city where c.snum<>s.snum;
+
+119
+ select c.cnum, c.cname, sum(o.amt) total from customers c join or ers o on c.cnum=o.cnum group by c.cnum, c.cname order by total limit 1;
+
+120
+ select if(exists(select 1 from customers c where c.city="berlin")and not exists (select 1 from salespeople s where s.city="berlin"), 'yes', 'no')as answer;
